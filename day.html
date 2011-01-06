@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table>
+{% for sync in syncs %}
+<tr>
+<th>Report: <a href="/day/{{ sync }}">{{ sync }}</a></th>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+cron:
+- description: reload deals
+  url: /cron
+  schedule: every 45 mins
+
+
+
+ 

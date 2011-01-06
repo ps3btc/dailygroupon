@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<p>
+Ever wondered what the hottest deals on <a
+href="http://www.groupon.com">Groupon</a> are? Or what <a
+href="http://www.groupon.com">Groupon</a>'s daily revenue is? On
+December 27, 2010, before heading out for dinner (ethiopian) I asked
+myself these questions. Almost immediately, I learned that Groupon
+exposed an API. So obviously, I had to hack something up.
+</p>
+
+<p>
+I <b>estimate revenue</b> by multiplying the <b>quantity sold</b> and
+the <b>price</b> of a given deal. I only do this if the deal has
+<b>tipped</b>, meaning, the <b>deal is on</b>.
+</p>
+
+<p>
+Everyone on the interwebs seems to speculate what <a
+href="http://www.groupon.com">Groupon</a>'s revenue is. Hello! They
+have an API, we can chart this already :) </p>
+
+<p>
+As you can see, I have no UI skills. I built this website in under 6
+hours. If you want to extend this project, drop me a note at
+hareesh.nagarajan AT gmail.
+</p>
+
+<p>
+<a href="http://www.groupon.com">Groupon</a> appears to sell deals in
+US Dollars (USD) and in Canadian Dollars (CAD). The revenue in CAD is
+a tiny number. Since 1 CAD ~ 1 USD, these days, I've converted all
+revenue to USD.
+</p>
+
+<p>
+<b>Update Jan 4, 2010</b>: I noticed that <a
+href="http://www.groupon.com">Groupon</a> has a number of deals that
+span multiple days. So before 1/4/2010, I was carrying over the
+revenue for multi day deal. I decided to fix that. So if a deal is on
+for 3 days, and it nets in $200 in revenue by day 2, then I assign
+$200/3 as revenue for that deal on day 2.
+
+<p>
+Of course, I'm in no way affiliated with <a
+href="http://www.groupon.com">Groupon</a>. I simply built this serivce
+to have some fun. All possible shortcuts were taken to code this
+up. The code is gross. Enjoy!
+</p>
+
+
+{% endblock %}

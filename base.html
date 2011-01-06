@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+ <head>
+  <title>Hourly Groupon Statistics</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+  <meta name="author" content="Hareesh Nagarajan"/>
+  <meta name="description" content="Hourly Groupon Statistics?"/>
+  <meta name="keywords" content="groupon stats API hourly"/>
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta name="google-site-verification" content="JpjYYcChDxj7EqqaUQSPHj0LWnrxLmNVCvqym5KyvYw" />
+  <style type="text/css" media="screen">
+   body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #AAA;
+    background-color: #0;
+    font-size: 1.5em;
+    padding: 50px;
+   }
+   a {color:#00; text-decoration:underline;}
+   div.revenue {
+    BORDER-RIGHT: #87ceeb 1px solid;
+    PADDING-RIGHT: 2px;
+    BORDER-TOP: #87ceeb 1px solid;
+    PADDING-LEFT: 2px;
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: xx-large;
+    PADDING-BOTTOM: 2px;
+    MARGIN: 2px 10% 10px;
+    BORDER-LEFT: #87ceeb 1px solid;
+    COLOR: #191970;
+    PADDING-TOP: 2px;
+    BORDER-BOTTOM: #87ceeb 1px solid;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana, Arial;
+    BACKGROUND-COLOR: #b0c4de;
+    TEXT-ALIGN: center;
+    FONT-VARIANT: normal;
+    TEXT-DECORATION: none;
+   }
+   div.report_time {
+    BORDER-RIGHT: #87ceeb 1px solid;
+    PADDING-RIGHT: 2px;
+    BORDER-TOP: #87ceeb 1px solid;
+    PADDING-LEFT: 2px;
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: medium;
+    PADDING-BOTTOM: 2px;
+    MARGIN: 2px 10% 10px;
+    BORDER-LEFT: #87ceeb 1px solid;
+    COLOR: #191470;
+    PADDING-TOP: 2px;
+    BORDER-BOTTOM: #87ceeb 1px solid;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana, Arial;
+    BACKGROUND-COLOR: #FFA07A;
+    TEXT-ALIGN: center;
+    FONT-VARIANT: normal;
+    TEXT-DECORATION: none;
+   }
+
+   div.latest {
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: small;
+    COLOR: #D3D3D3;
+    FONT-STYLE: italic;
+    PADDING-BOTTOM: 4px;
+    PADDING-LEFT: 2px;
+    FONT-FAMILY: Verdana, Arial;
+    TEXT-ALIGN: center;
+    FONT-VARIANT: normal;
+    TEXT-DECORATION: none;
+   }
+
+    table.deals {
+      border-width: 4px;
+      border-spacing: 3px;
+      border-style: outset;
+      border-color: gray;
+      border-collapse: collapse;
+      background-color: rgb(250, 240, 230);
+   }
+   table.deals th {
+      border-width: 0px;
+      padding: 5px;
+      border-style: outset;
+      border-color: green;
+      background-color: rgb(250, 240, 230);
+   }
+   table.deals td {
+	border-width: 1px;
+	padding: 5px;
+	border-style: dotted;
+	border-color: green;
+        TEXT-ALIGN: left;
+	background-color: rgb(250, 240, 230);
+   }
+   .title {color: #FFF; font-size: 130%;}
+   body {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #AAA;
+    padding: 50px;
+   }
+  </style>
+</head>
+<html>
+  <body>
+    <center>
+          <h1><u><a href="/"><del>Daily</del>, Hourly Groupon Statistics</a></u></h1>
+          <a href="/">daily</a> &nbsp; <a href="/all">all</a> &nbsp; <a href="/about">about</a> &nbsp; <a href="/feedback">feedback</a>
+        </center>
+        <p/>
+        <div class="latest">(Latest update: {{ last_updated|timesince }} ago ...)</div>
+
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdailygroupon.appspot.com%2F&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
+
+
+        {% block content %}{% endblock %}
+
+    <hr>
+    <center>
+	Copyright &copy; <a href="http://hnagweb.appspot.com">Hareesh Nagarajan</a> 2010
+    </center>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20456237-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>

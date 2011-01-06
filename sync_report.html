@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="report_time">Report generated: {{ sync_time }} UTC</div>
+<div class="revenue">Revenue: ${{ total_revenue }}</div>
+
+<p/>
+
+<table class="deals">
+<tr>
+<th>Revenue</th>
+<th>Deal</th>
+</tr>
+<tr>
+{% for deal in deals %}
+<tr>
+<td><b>${{ deal.revenue|floatformat:"-0" }}</b></td>
+<td><small><a href="{{ deal.url }}">{{ deal.title }}</a></small></td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
