@@ -5,7 +5,7 @@ cron:
 
 - description: delete old syncs
   url: /crondelete
-  schedule: every 5 mins
+  schedule: every 24 hours
 
 
  
