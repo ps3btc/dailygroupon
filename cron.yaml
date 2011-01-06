@@ -3,6 +3,9 @@ cron:
   url: /cron
   schedule: every 45 mins
 
+- description: delete old syncs
+  url: /crondelete
+  schedule: every 5 mins
 
 
  

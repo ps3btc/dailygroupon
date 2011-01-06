@@ -113,13 +113,10 @@ def Process():
         if deal['endAt']:
           end_date = datetime.datetime.strptime(deal['endAt'], DATE_PATTERN)
           delta = end_date - start_date
-          obj.days = round((delta.days * SECONDS_IN_DAY + delta.seconds)/SECONDS_IN_DAY)
-          if obj.days > 1.00:
+          xdays = round((delta.days * SECONDS_IN_DAY + delta.seconds)/SECONDS_IN_DAY)
+          if xdays > 1:
+            obj.days = xdays
             logging.info('more than 1 %s days: %f', obj.url, obj.days)
-        else:
-          logging.error('Deal has no endAt')
-      else:
-        logging.error('Deal has no startAt')
       obj.price = deal['options'][0]['price']['amount']/100.0
       obj.currency = deal['options'][0]['price']['currencyCode']
       obj.revenue = (obj.quantity_sold * obj.price)/obj.days
@@ -148,7 +145,7 @@ def LastUpdated():
 ##      Class Handlers
 ##
 ######################################################################
-   
+
 class All(webapp.RequestHandler):
   def get(self):
     sync_list = []
@@ -163,12 +160,13 @@ class All(webapp.RequestHandler):
     render_page = template.render(path, template_values)
     self.response.out.write(render_page)
 
+
 class Home(webapp.RequestHandler):
   def get(self):
     sync_list = []
     revenue_list = []
     render = []
-    syncs = db.GqlQuery("SELECT * FROM Syncs ORDER BY date DESC LIMIT 500")
+    syncs = db.GqlQuery("SELECT * FROM Syncs ORDER BY date DESC LIMIT 1000")
     sync_keys = []
     for sync in syncs:
       sync_key = sync.sync_time[:sync.sync_time.find(' ')]
@@ -238,6 +236,34 @@ class Cron(webapp.RequestHandler):
   def get(self):
     Process()
 
+class CronDelete(webapp.RequestHandler):
+  def get(self):
+    syncs = db.GqlQuery("SELECT * FROM Syncs ORDER BY date DESC")
+    # Get a list of all the syncs that are the latest for that day
+    days = []
+    old_sync_keys = []
+    for sync in syncs:
+      day = sync.sync_time[:sync.sync_time.find(' ')]
+      if day not in days:
+        days.append(day)
+      else:
+        old_sync_keys.append(sync.sync_time)
+        
+    logging.info('Deleting %d records', len(old_sync_keys))
+
+    # Data belonging to all old sync keys can be deleted.
+    for st in old_sync_keys[:30]:
+      logging.info('Deleting ... %s', st)
+      results=db.GqlQuery("SELECT * FROM Deal WHERE sync_time = :tt", tt=st)
+      for result in results:
+        result.delete()
+      results=db.GqlQuery("SELECT * FROM Syncs WHERE sync_time = :tt", tt=st)
+      for result in results:
+        result.delete()
+      results=db.GqlQuery("SELECT * FROM Revenue WHERE sync_time = :tt", tt=st)
+      for result in results:
+        result.delete()
+
 class Feedback(webapp.RequestHandler):
   def get(self):
     path = os.path.join(os.path.dirname(__file__), 'feedback.html')
@@ -260,12 +286,14 @@ class About(webapp.RequestHandler):
 def main():
   application = webapp.WSGIApplication([
       ('/', Home),
-      ('/all', All),
       ('/about', About),
       ('/feedback', Feedback),
       ('/cron', Cron),
-      (r'/sync/(.*)', SyncReport),
+      ('/crondelete', CronDelete),
       (r'/day/(.*)', DayReport),
+      # Not shown to the public
+      ('/all', All),
+      (r'/sync/(.*)', SyncReport),
       ], debug=True)
   wsgiref.handlers.CGIHandler().run(application)
 
